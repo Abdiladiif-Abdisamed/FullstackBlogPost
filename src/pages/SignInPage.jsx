@@ -16,8 +16,8 @@ const SignInPage = () => {
 
 
 
-  const authIfo = useAuth()
-  console.log({ authIfo })
+//   const authIfo = useAuth()
+//   console.log({ authIfo })
 
   const navigate = useNavigate()
 
