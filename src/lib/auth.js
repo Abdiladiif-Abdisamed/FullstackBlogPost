@@ -15,6 +15,7 @@ if(data?.user ){
     const {data : sessionData }= await supabase.auth.getSession()
 
     if(!sessionData?.session){
+        console.error("No session found after sign up")
         return data
     }
 
@@ -37,4 +38,80 @@ if(data?.user ){
     }
 }
     return data
+}
+
+
+// SignIn
+
+export const signIn = async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+    })
+
+    if (error) throw error;
+
+    if(data?.user){
+
+        try{
+            const profile = await getUserProfile(data.user.id)
+            console.log("User profile:", profile)
+        }catch(profileError){
+            console.error("Error fetching user profile:", profileError)
+            throw new Error(profileError.message || "Failed to sign in")
+
+        }
+    }
+}
+
+
+
+// get user profile
+export const getUserProfile = async (userId) => {
+
+    const {data : sessionData} = await supabase.auth.getSession()
+
+    const {data : userData , error} = await supabase.from('users')
+    .select('*')
+    .eq('id', userId)
+    .single()
+
+    if(error && error.code === 'PGRST116'){
+        console.error("User not found" )
+
+
+    const email = userData?.user.email
+
+    const defaultUsername = email ? email.split('@')[0] : `user_${Date.now()}`
+
+
+    // create profile
+        const { data: newProfile, error: profileError } = await supabase
+    .from('users')
+    .insert({
+        id: userId,
+        email: email,
+        username: defaultUsername,
+        avatar_url: null
+    })
+    .select()
+    .single()
+
+    if(profileError){
+        console.error("Error creating profile:", profileError)
+        throw new Error(profileError.message || "Failed to create profile")
+    }else{
+        console.log("Profile created:", newProfile)
+    }
+
+    return newProfile;
+        
+    }
+
+    if(error){
+        console.error("Error fetching user profile:", error)
+        throw new Error(error.message || "Failed to fetch user profile")
+    }
+
+    return sessionData
 }

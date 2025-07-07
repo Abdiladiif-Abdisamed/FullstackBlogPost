@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
-// import { signIn } from '../lib/auth'
+import { signIn } from '../lib/auth'
 // import { useAuth } from '../context/AuthContext'
 
 const SignInPage = () => {
@@ -31,6 +31,8 @@ const SignInPage = () => {
     try {
 
       await signIn(email, password);
+
+      alert("You have successfully signed in")
 
       navigate('/')
 
