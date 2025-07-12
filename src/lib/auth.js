@@ -71,7 +71,7 @@ export const getUserProfile = async (userId) => {
 
     const {data : sessionData} = await supabase.auth.getSession()
 
-    const {data : userData , error} = await supabase.from('users')
+    const {data  , error} = await supabase.from('users')
     .select('*')
     .eq('id', userId)
     .single()
@@ -79,9 +79,12 @@ export const getUserProfile = async (userId) => {
     if(error && error.code === 'PGRST116'){
         console.error("User not found" )
 
+        // 
+        // create a new profile if it doesn't exist
+    const { data: userData } = await supabase.auth.getUser();
 
     const email = userData?.user.email
-
+        console.log("email", userData)
     const defaultUsername = email ? email.split('@')[0] : `user_${Date.now()}`
 
 
@@ -113,5 +116,18 @@ export const getUserProfile = async (userId) => {
         throw new Error(error.message || "Failed to fetch user profile")
     }
 
-    return sessionData
+    return data
 }
+
+// waa function kuu sheegayah user-ku login yahay iyo in kale
+export function onAuthChange(callback){
+    const {data} = supabase.auth.onAuthStateChange((event, session) => {
+        callback(session?.user || null , event)
+    })
+    return () => data.subscription.unsubscribe();
+}
+
+// sign out function
+export async function signOut() {
+    await supabase.auth.signOut()
+  }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { signIn } from '../lib/auth'
-// import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/AuthContext'
 
 const SignInPage = () => {
 
@@ -16,8 +16,8 @@ const SignInPage = () => {
 
 
 
-//   const authIfo = useAuth()
-//   console.log({ authIfo })
+  const authIfo = useAuth()
+  console.log({ authIfo })
 
   const navigate = useNavigate()
 

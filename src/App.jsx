@@ -7,10 +7,18 @@ import SignUpPage from './pages/SignUpPage'
 import ArticlesPage from './pages/ArticlesPage'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import { AuthProvider } from './context/AuthContext'
+import { UnAuthenticatedRoute } from './components/UnAuthenticatedRoute'
+import { ManageArticlesPage } from './pages/ManageArticlesPage'
+import  ProfilePage  from './pages/ProfilePage'
+import { ArticleEditorPage } from './pages/ArticleEditorPage'
+import { ProtectedRoute } from './components/ProtectedRoute'
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
   return (
+    <AuthProvider>
     <div>
       {/* Header */}
       <Header />
@@ -27,9 +35,61 @@ function App() {
 
           {/* unAuthenticated pages  */}
 
-          <Route path="/signin" element={<SignInPage /> } /> 
-          <Route path="/signup" element={<SignUpPage /> } /> 
+          <Route path="/signin" element={
+            <UnAuthenticatedRoute>
+            <SignInPage /> 
+            </UnAuthenticatedRoute>
+            } /> 
+          <Route path="/signup" element={
+            <UnAuthenticatedRoute>
+            <SignUpPage /> 
+            </UnAuthenticatedRoute>
+            } /> 
 
+            {/* Protected Route  */}
+
+
+            <Route path='/editor' 
+            element={
+            <ProtectedRoute>
+            <ArticleEditorPage/>
+            </ProtectedRoute>
+            }>
+              
+            </Route>
+
+            <Route path='/editor/:id' 
+            
+            element={
+            <ProtectedRoute>
+            <ArticleEditorPage/>
+            </ProtectedRoute>
+            }>
+
+            </Route>
+
+            <Route path='/manage-articles' 
+            
+            element={
+            <ProtectedRoute>
+            <ManageArticlesPage/>
+            </ProtectedRoute>
+
+            }>
+
+            </Route>
+
+
+             <Route path='/profile' 
+            
+            element={
+            <ProtectedRoute>
+            <ProfilePage/>
+            </ProtectedRoute>
+            }>
+
+            </Route>
+            
         </Routes>
       </main>
 
@@ -38,6 +98,8 @@ function App() {
       <Footer />
       
        </div>
+       <Toaster/>
+       </AuthProvider>
   )
 }
 
