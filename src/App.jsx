@@ -11,7 +11,7 @@ import { AuthProvider } from './context/AuthContext'
 import { UnAuthenticatedRoute } from './components/UnAuthenticatedRoute'
 import { ManageArticlesPage } from './pages/ManageArticlesPage'
 import  ProfilePage  from './pages/ProfilePage'
-import { ArticleEditorPage } from './pages/ArticleEditorPage'
+import ArticleEditorPage  from './pages/ArticleEditorPage'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { Toaster } from 'react-hot-toast';
 

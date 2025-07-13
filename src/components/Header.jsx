@@ -10,7 +10,7 @@ import { signOut } from '../lib/auth'; // Import the signOut function
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
-    const { isLoggedIn , logout, profile} = useAuth();
+    const { isLoggedIn, logout, profile } = useAuth();
     const avatar_url = "https://lh3.googleusercontent.com/a/ACg8ocIyppVHY0V3sEVQEQTh1-FYcxmZtdycobsmEHoetXBsBxGLT2om=s288-c-no"
 
     return (
@@ -30,10 +30,16 @@ const Header = () => {
 
                             <Link to='/articles' className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-900'>Articles</Link>
 
-                            <Link to='/write' className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-900'>Write</Link>
+                            { isLoggedIn && (
+                                    <>
+                                        <Link to='/write' className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-900'>Write</Link>
 
 
-                            <Link to='/myArticle' className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-900'>My Article</Link>
+                                        <Link to='/myArticle' className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-900'>My Article</Link>
+                                    </>
+                                )
+                            }
+
                         </nav>
                     </div>
                     {/* Right */}
@@ -66,11 +72,11 @@ const Header = () => {
 
                                                     <Link className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'>Manage Articles</Link>
 
-                                                    <button 
-                                                    onClick={() => 
-                                                        logout()
-                                                    }
-                                                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left'>Sign Out </button>
+                                                    <button
+                                                        onClick={() =>
+                                                            logout()
+                                                        }
+                                                        className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left'>Sign Out </button>
 
                                                 </div>
                                             )
@@ -137,7 +143,7 @@ const Header = () => {
                             Profile
                         </Link>
                         <button
-                            onClick={() => 
+                            onClick={() =>
                                 logout()
                             }
 

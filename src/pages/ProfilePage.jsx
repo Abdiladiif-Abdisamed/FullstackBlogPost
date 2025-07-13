@@ -117,6 +117,8 @@ const ProfilePage = () => {
 
         } catch (error) {
             toast.error(error.message || "error updating user profile")
+        }finally{
+            setLoading(false)
         }
 
     }
