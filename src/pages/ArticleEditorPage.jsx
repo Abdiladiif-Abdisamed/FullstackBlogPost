@@ -88,7 +88,7 @@ const ArticleEditorPage = () => {
 
 
                 } catch (error) {
-                    console.error('Error fetching article:', err)
+                    console.error('Error fetching article:', error)
                     setError('Failed to load article')
                 }
 
