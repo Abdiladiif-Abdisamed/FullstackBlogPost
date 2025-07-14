@@ -4,8 +4,8 @@ import { FiInfo, FiSave, FiTag, FiX } from 'react-icons/fi'
 import QuillEditor from '../components/QuillEditor'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate, useParams } from 'react-router'
-// import { uploadImage } from '../lib/storage'
-// import { createArticle, getArticleById, updateArticle } from '../lib/articles'
+import { uploadImage } from '../lib/storage'
+import { createArticle, getArticleById, updateArticle } from '../lib/articles'
 
 
 
@@ -21,7 +21,7 @@ const AVAILABLE_TAGS = [
 const ArticleEditorPage = () => {
 
     const { id } = useParams();
-    console.log("id from url", id)
+    // console.log("id from url", id)
 
     const isEditMode = Boolean(id)
 

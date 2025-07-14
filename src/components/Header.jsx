@@ -32,10 +32,10 @@ const Header = () => {
 
                             { isLoggedIn && (
                                     <>
-                                        <Link to='/write' className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-900'>Write</Link>
+                                        <Link to='/editor' className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-900'>Write</Link>
 
 
-                                        <Link to='/myArticle' className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-900'>My Article</Link>
+                                        <Link to='/manage-articles' className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-900'>My Article</Link>
                                     </>
                                 )
                             }
