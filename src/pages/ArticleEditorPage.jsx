@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 import { FiInfo, FiSave, FiTag, FiX } from 'react-icons/fi'
 import QuillEditor from '../components/QuillEditor'
 import { useAuth } from '../context/AuthContext'
-import { useNavigate, useParams } from 'react-router'
+import {  useNavigate, useParams } from 'react-router'
 import { uploadImage } from '../lib/storage'
 import { createArticle, getArticleById, updateArticle } from '../lib/articles'
 
@@ -326,6 +326,9 @@ const ArticleEditorPage = () => {
             console.log('Article saved successfully:', savedArticle)
 
             toast.success(`Article ${isEditMode ? 'updated' : 'created'} successfully!`)
+
+            // Redirect to the article page after saving
+            navigate("/manage-articles")
 
         } catch (error) {
             console.error('Error saving article:', error)
